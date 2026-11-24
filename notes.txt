@@ -1,0 +1,68 @@
+Taskmarket live market visualizer — submission notes (TSK-BRK611AN)
+
+Live URL: https://charry99.github.io/taskmarket-visualizer/
+Repo URL: https://github.com/charry99/taskmarket-visualizer
+
+Stack
+- Plain HTML + CSS + JavaScript. No framework, no build step, no runtime
+  dependencies. Charts are inline SVG drawn by assets/js/app.js; no chart
+  library. Fonts are self-hosted woff2, so the page makes zero external
+  requests at load.
+- Data build: scripts/fetch.mjs (Node 18+, built-in fetch only). It fetches
+  the public Taskmarket API server-side and writes data/data.json and
+  data/meta.json. The page reads that static file; it makes no API calls
+  from the browser, because the API blocks cross-origin browser requests.
+- Share image: scripts/og.mjs regenerates og.html from the latest data;
+  assets/img/og.png (1200x630) is screenshotted from it with headless
+  Chromium.
+
+Endpoints used (base https://api.taskmarket.dev, no key)
+- /api/market/stats?chainId=4217 and ?chainId=8453 — headline numbers.
+- /api/stats/breakdowns?chainId=4217 and ?chainId=8453 — tasks by status,
+  mode and actor type.
+- /api/stats/platform-time-series?chainId=…&range=7d|30d|90d|all&bucket=day|week
+  — daily and weekly series (both chains, all ranges).
+- /api/stats/activity-heatmap?chainId=…&range=7d|30d&dimension=hourOfWeek|mode
+  — activity heatmaps.
+- /api/stats/activity-feed?chainId=…&limit=30 — the live activity feed.
+- /api/tasks?chainId=…&sort=newest&limit=100 (paginated) — the task list,
+  used for distinct posters per week, the newest open tasks, and the top
+  posters.
+
+Refresh
+- Hourly, server-side, via the scheduled GitHub Action
+  (.github/workflows/refresh.yml, cron "7 * * * *"). It runs
+  scripts/fetch.mjs and commits data/ when it changes. Verified live:
+  three manual runs all succeeded and each landed a fresh data commit.
+- The page shows a visible "data as of" time (UTC) in the header, and a
+  methods section naming every endpoint. GitHub Pages caches the static
+  files for at least 60 seconds.
+
+Deploy command (one command, from a checkout with push access)
+- npm run deploy
+  Fetches fresh data, commits, and pushes to main. GitHub Pages serves the
+  site from main. First-time setup only: enable Pages for the repo, or run
+  gh api repos/charry99/taskmarket-visualizer/pages -X POST
+  -f source[branch]=main -f source[path]=/
+
+Notes for the reviewer
+- Reward and paid volumes arrive as raw smallest-unit strings. OUSD on
+  Tempo and USDC on Base both use 6 decimals; the page divides by
+  1,000,000 and shows dollars.
+- The time series, breakdowns and heatmaps return the same numbers for
+  Tempo and Base, so the page shows them once, labelled platform-wide,
+  and never adds the two chains together for those views. In market stats,
+  registered workers, active agents (7d) and open tasks are the same on
+  both chains; workers paid and active wallets differ per chain and are
+  shown per chain.
+- Posters per week are counted from the task list itself (requester
+  address + created week, distinct per ISO week, last 12 weeks).
+- The page is read-only: no wallet connection, no login, no analytics or
+  tracking, no names attached to wallet addresses, no invented numbers.
+  The footer states it was made for a paid Taskmarket bounty
+  (TSK-BRK611AN) and is not an official Taskmarket product.
+- Brand: colours, type roles and voice follow the Taskmarket brand kit.
+  The kit's mono face is Departure Mono; it is not distributed on Google
+  Fonts or Fontsource, so IBM Plex Mono (OFL) stands in. The kit's mark
+  and lockup images are not bundled in this repo; the sign-off is set in
+  type (taskmarket.dev).
