@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-28T03:51:59.957Z",
-  "generatedAtUnix": 1795837919957,
-  "fetchSeconds": "7.2",
+  "generatedAt": "2026-11-28T12:54:28.846Z",
+  "generatedAtUnix": 1795870468846,
+  "fetchSeconds": "7.4",
   "chainsFetched": [
     4217,
     8453
   ],
-  "tasksFetched": 2203,
+  "tasksFetched": 2204,
   "endpoints": [
     "https://api.taskmarket.dev/api/market/stats?chainId=4217",
     "https://api.taskmarket.dev/api/stats/breakdowns?chainId=4217",
@@ -47,12 +47,12 @@
     "https://api.taskmarket.dev/api/tasks?chainId=4217&sort=newest&limit=100&cursor=2026-11-12T06%3A40%3A13.379Z",
     "https://api.taskmarket.dev/api/tasks?chainId=4217&sort=newest&limit=100&cursor=2026-10-30T18%3A29%3A21.910Z",
     "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100",
-    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-11-02T06%3A57%3A24.819Z",
-    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-10-30T09%3A53%3A51.512Z",
-    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-10-06T22%3A34%3A30.337Z",
-    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-09-08T09%3A11%3A18.026Z",
-    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-08-06T20%3A57%3A42.012Z",
-    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-07-25T13%3A22%3A55.314Z"
+    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-11-02T07%3A22%3A05.961Z",
+    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-10-30T10%3A55%3A16.335Z",
+    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-10-06T22%3A34%3A49.819Z",
+    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-09-08T20%3A11%3A57.887Z",
+    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-08-07T18%3A38%3A50.181Z",
+    "https://api.taskmarket.dev/api/tasks?chainId=8453&sort=newest&limit=100&cursor=2026-07-25T13%3A23%3A12.117Z"
   ],
   "errors": [],
   "units": "Reward and paid volumes are raw smallest-unit strings from the API (OUSD on Tempo, USDC on Base, both 6 decimals). The page divides by 1,000,000.",
